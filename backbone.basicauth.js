@@ -9,17 +9,22 @@
  * backbone.basicauth.js may be freely distributed under the MIT license.
  */
 ;( function (root, factory) {
-  // AMD module if available
   if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['underscore', 'backbone'], factory);
-    } else {
-        // Browser globals
-        root.amdWeb = factory(root._, root.Backbone);
-    }
-}( this, function (_, Backbone) {
+		define(['backbone', 'underscore'], function (Backbone, _) {
+			return factory(root, Backbone, _);
+		});
+	}
+	else if (typeof exports !== 'undefined') {
+		var Backbone = require('backbone');
+		var _ = require('underscore');
+		module.exports = factory(root, Backbone, _);
+	}
+	else {
+		factory(root, root.Backbone, root._);
+	}
+}( this, function (root, _, Backbone) {
 
-  var btoa = window.btoa;
+  var btoa = root.btoa;
 
   /**
    * Returns a base64 encoded "user:pass" string
