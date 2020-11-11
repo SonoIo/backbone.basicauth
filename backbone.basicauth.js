@@ -22,7 +22,7 @@
 	else {
 		factory(root, root.Backbone, root._);
 	}
-}( this, function (root, _, Backbone) {
+}( window, function (root, _, Backbone) {
 
   var btoa = root.btoa;
 
